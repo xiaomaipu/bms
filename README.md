@@ -1,7 +1,8 @@
 # bms
 企业内部图书管理系统
 
-
+###QQ交流群
+705057231
 
 ## 简述
     bms分后台管理系统和小程序两部分
@@ -34,6 +35,8 @@
 
 ###小程序运行
 详见src/main/resources/webapp/libray/README.md文件
+
+
 
 
 
