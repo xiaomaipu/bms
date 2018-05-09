@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="flag::head_flag('图书管理系统')"></head>
+<body class="no-skin">
+<style>
+    .margin-right {
+        margin-right: 20px;
+    }
+    .custom-center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .width1000{
+        width: 1000px;
+    }
+</style>
+<link rel="stylesheet" th:href="@{/assets/css/dropzone.min.css}" />
+<div id="navbar" class="navbar navbar-default ace-save-state"
+     th:include="flag::navbar-flag(${#httpServletRequest.remoteUser})">
+    <!--navbar-->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <div th:include="flag::menu_flag" id="sidebar" class="sidebar responsive ace-save-state"></div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">图书</a>
+                    </li>
+                    <li class="active">图书管理</li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        图书管理
+                        <small>
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                            新增图书
+                        </small>
+                    </h1>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="text-center" id="bookName">
+                                <h2 th:text="${book.bookName}"></h2>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center"  id="authorName">
+                                <h3 th:text="${book.authorName}"></h3>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center" id="coverImgUrl">
+                                <img th:src="${book.img}" alt="图书封面"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center" id="canBorrowDays">
+
+                                <p style="font-size: 20px;color: #4D5C73">可借<span th:text="${book.borrowNum}" style="color: #1a1a1a"></span>天</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="id" th:value="${book.id}" id="id"/>
+                            <label class="col-sm-6 control-label no-padding-right" for="userSelecte"> 请选择借书人 </label>
+                            <select id="userSelecte" name="userId" th:id="userId">
+                                <option th:each="user:${users}" th:if="${!#strings.isEmpty(user.nickName)}" th:text="${user.nickName}" th:value="${user.id}"></option>
+                                <option th:each="user:${users}" th:if="${#strings.isEmpty(user.nickName)}" th:text="${user.userName}" th:value="${user.id}"></option>
+                            </select>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div style="width: 297px" class="custom-center">
+                                <button class="btn btn-info" type="button" id="submitBtn">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    提交
+                                </button>
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset" id="cancleBtn">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer" th:include="flag::foot_flag"></div>
+
+</div><!-- /.main-container -->
+
+<div th:include="flag::script_flag"></div>
+<script>
+    /*<![CDATA[*/
+    $(function () {
+        $("#submitBtn").on("click",function () {
+            $.ajax({
+                type:"post",
+                url:globalPath+"/borrow/userborrow",
+                data:{
+                    id:$.trim($("#id").val()),
+                    userId:$.trim($("#userId").val())
+                },
+                success:function (data) {
+                    console.log(data)
+                    if(data.code = 200){
+                        alert("借书成功!")
+                        location.href = globalPath+"/book/queryList"
+                    }else{
+                        alert(data.msg)
+                    }
+                }
+            })
+        })
+        $("#cancleBtn").on("click",function () {
+            location.href = globalPath+"/book/queryList"
+        })
+    })
+    /*]]>*/
+</script>
+</body>
+</html>

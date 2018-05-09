@@ -1,0 +1,32 @@
+<wxs module="dateFr" src="../../js/filter.wxs"></wxs>
+<view id="mine_page">
+    <view class="userInfo">
+        <image mode="scaleToFill" style="width: 750rpx;height: 360rpx;" src="../../image/img.png"></image>
+        <label id="logo">
+           {{dateFr.getName(name)}}
+        </label>
+        <label id="name">
+           {{dateFr.getName(name)}}
+        </label>
+    </view>
+    <view id='list'>
+        <ul>
+            <li class="{{style1}}" data-code="1" bindtap="checkAction">阅读中</li>
+            <li class="{{style2}}" data-code="2" bindtap="checkAction">预约</li>
+            <li class="{{style3}}" data-code="3" bindtap="checkAction">阅读记录</li>
+            <li class="{{style4}}" data-code="4" bindtap="checkAction">我的收藏</li>
+        </ul>
+    </view>
+    <view class="mybook">
+        <view class="em_msg" wx:if="{{showList.length==0}}">暂无书籍</view>
+        <view class="book_style" wx:for="{{showList}}" >
+             <navigator url="../bookDetail/bookDetail?id={{item.book.id}}&souce=1&time={{item.book.created}}" hover-class="navigator-hover">
+            <image mode="aspectFill" src="{{item.book.img}}"></image>
+            <label class="bookname">{{item.book.bookName}}</label>
+            
+            </navigator>
+        </view>
+        <view style="clear:both;"></view>
+    </view>
+  
+</view>

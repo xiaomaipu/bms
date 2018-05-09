@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imxiaomai.bms.mapper.BookTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.imxiaomai.bms.entity.BookType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="BIT" />
+  </resultMap>
+
+  <insert id="save" parameterType="com.imxiaomai.bms.entity.BookType" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO book_type (type, name, creator,updator,created,updated,yn)
+    VALUES (#{type},#{name},#{creator},null,now(),null,1)
+  </insert>
+
+  <select id="queryBookType" resultMap="BaseResultMap" >
+ SELECT id,name,type
+    FROM
+    book_type
+     ORDER BY id DESC limit 1
+  </select>
+
+  <select id="queryBookTypeByName" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.BookType">
+    SELECT id,name,type
+    FROM
+    book_type  where name = #{name}
+    ORDER BY id DESC limit 1
+  </select>
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.BookType">
+    SELECT id,type,name
+    FROM
+    book_type where yn =1
+    ORDER BY id DESC
+  </select>
+
+
+  <!-- 更新-->
+  <update id="update" parameterType="com.imxiaomai.bms.entity.BookType" >
+    update book_type
+    <set >
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="yn != null" >
+        yn = #{yn},
+      </if>
+      updated = now(),
+      updator = #{updator}
+    </set>
+    where id = #{id}
+  </update>
+
+
+</mapper>

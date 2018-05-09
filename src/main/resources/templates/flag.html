@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head_flag (title)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title th:text="${title}"></title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/font-awesome/4.5.0/css/font-awesome.min.css}" />
+
+    <!-- text fonts -->
+    <link rel="stylesheet" th:href="@{/assets/css/fonts.googleapis.com.css}" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" th:href="@{/assets/css/ace.min.css}" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <link rel="stylesheet" th:href="@{/assets/css/ace-skins.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/ace-rtl.min.css}" />
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        globalPath = [[${globalPath}]];
+        console.log(globalPath);
+        /*]]>*/
+    </script>
+    <!-- ace settings handler -->
+    <script th:src="@{/assets/js/ace-extra.min.js}"></script>
+</head>
+
+<body>
+
+<div th:fragment="navbar-flag(username)" class="navbar-container ace-save-state" id="navbar-container">
+
+        <div class="navbar-header pull-left">
+            <a href="index.html" class="navbar-brand">
+                <small>
+                    <i class="fa fa-leaf"></i>
+                    图书管理系统
+                </small>
+            </a>
+        </div>
+        <form id="logoutForm" th:action="@{/logout}" method="post" th:inline="text">
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <li class="light-blue dropdown-modal">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" th:src="@{/images/user.jpg}" alt="加载头像" />
+                            <span class="user-info" th:inline="text">
+									<small>你好,</small>
+									[[${username}]]
+						</span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="#">
+                                    <i class="ace-icon fa fa-cog"></i>
+                                    修改密码
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a style="cursor: pointer" onclick="document.getElementById('logoutForm').submit();">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    退出登陆
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </form>
+</div><!-- /.navbar-container -->
+
+
+
+<div th:fragment="menu_flag" id="sidebar" class="sidebar responsive ace-save-state">
+        <ul class="nav nav-list">
+            <li class="">
+                <a th:href="@{/user/list}">
+                    <i class="menu-icon glyphicon glyphicon-user"></i>
+                    <span class="menu-text"> 用户管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a th:href="@{/category/queryList}">
+                    <i class="menu-icon glyphicon glyphicon-option-vertical"></i>
+                    <span class="menu-text"> 图书分类管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a th:href="@{/book/queryList}">
+                    <i class="menu-icon glyphicon glyphicon-book"></i>
+                    <span class="menu-text"> 图书管理 </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a th:href="@{/borrow/queryList}">
+                    <i class="menu-icon glyphicon glyphicon-transfer"></i>
+                    <span class="menu-text"> 借书管理 </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+        </ul><!-- /.nav-list -->
+</div>
+
+
+
+
+<div th:fragment="foot_flag" class="footer">
+    <div class="footer-inner">
+        <div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">小麦便利店</span>
+							 &copy; 2018/1/31
+						</span>
+        </div>
+    </div>
+</div>
+
+<!-- basic scripts -->
+
+<div th:fragment="script_flag">
+    <script th:src="@{/assets/js/jquery-2.1.4.min.js}"></script>
+
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <!-- page specific plugin scripts -->
+    <!-- ace scripts -->
+    <script th:src="@{/assets/js/ace-elements.min.js}"></script>
+    <script th:src="@{/assets/js/ace.min.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+</div>
+
+
+</body>
+</html>

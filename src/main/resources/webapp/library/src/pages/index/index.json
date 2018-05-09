@@ -1,0 +1,7 @@
+{
+	"navigationBarTitleText": "嗨小图",
+	"onReachBottomDistance":"50px",
+	"disableScroll":false,
+	"enablePullDownRefresh":false
+
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="flag::head_flag('图书管理系统')"></head>
+<body class="no-skin">
+<style>
+    .margin-right{
+        margin-right: 20px;
+    }
+    .short-area{
+        width: 200px;
+        overflow: hidden;
+    }
+</style>
+<div id="navbar" class="navbar navbar-default ace-save-state" th:include="flag::navbar-flag(${#httpServletRequest.remoteUser})">
+    <!--navbar-->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <div th:include="flag::menu_flag" id="sidebar" class="sidebar responsive ace-save-state"></div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">图书</a>
+                    </li>
+                    <li class="active">图书列表</li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4 class="widget-title">图书列表</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <label for="bookName">图书名称:</label>
+                            <input class="form-field-1 margin-right" id="bookName" placeholder="图书名称" type="text" th:value="${bookParam.bookName}"/>
+                            <label for="category">图书分类:</label>
+                            <select id="category" class="margin-right">
+                                <option></option>
+                                <option th:each="bookType : ${bookTypes}" th:attr="value=${bookType.type}" th:text="${bookType.name}" selected="selected" th:if="${bookParam.type == bookType.type}">科技</option>
+                                <option th:each="bookType : ${bookTypes}" th:attr="value=${bookType.type}" th:text="${bookType.name}" th:unless="${bookParam.type == bookType.type}">科技</option>
+                            </select>
+                            <label for="bookState">图书状态:</label>
+                            <select id="bookState" class="margin-right">
+                                <option value=""></option>
+                                <option value="10" th:if="${bookParam.status != 10}">可借</option>
+                                <option value="20" th:if="${bookParam.status != 20}">已借</option>
+                                <option value="30" th:if="${bookParam.status != 30}">已预约</option>
+                                <option value="40" th:if="${bookParam.status != 40}">已下架</option>
+                                <option value="10" th:if="${bookParam.status == 10}" selected="selected">可借</option>
+                                <option value="20" th:if="${bookParam.status == 20}" selected="selected">已借</option>
+                                <option value="30" th:if="${bookParam.status == 30}" selected="selected">已预约</option>
+                                <option value="40" th:if="${bookParam.status == 40}" selected="selected">已下架</option>
+                            </select>
+                            <label for="bookKind">图书类型:</label>
+                            <select id="bookKind" class="margin-right">
+                                <option value=""></option>
+                                <option value="0" th:if="${bookParam.kind != 0}">纸质书</option>
+                                <option value="1" th:if="${bookParam.kind != 1}">电子书</option>
+                                <option value="0" th:if="${bookParam.kind == 0}" selected="selected">纸质书</option>
+                                <option value="1" th:if="${bookParam.kind == 1}" selected="selected">电子书</option>
+
+                            </select>
+                            <button class="btn btn-sm" id="queryBtn">
+                                <i class="ace-icon fa fa-search "></i>
+                                查询
+                            </button>
+                            <button class="btn btn-sm " type="button" id="addBtn">
+                                <i class="ace-icon fa fa-plus"></i>
+                                新增
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div>
+                            <table id="tb-header" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center">
+                                        序号
+                                    </th>
+                                    <th>图书名称</th>
+                                    <th>图书照片</th>
+                                    <th>图书类型</th>
+                                    <th>图书状态</th>
+                                    <th>图书作者</th>
+                                    <th>电子书</th>
+                                    <th>电子书密码</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="tb-info">
+                                <tr th:each="book,bookState:${bookPage.list}">
+                                    <td class="center" th:text="${bookState.index + 1}">
+                                        1
+                                    </td>
+                                    <td th:text="${book.bookName}">人与自然</td>
+                                    <td>
+                                        <img style="width: 150px;" src="https://www.baidu.com" alt="人与自然" th:attr="src=${book.img},alt=${book.bookName}"/>
+                                    </td>
+                                    <td th:text="${book.typeName}">科技类</td>
+                                    <td th:if="${book.kind == 1}"/>
+                                    <td th:if="${book.kind == 0}" th:switch="${book.status}">
+                                        <p th:case="10">可借</p>
+                                        <p th:case="20">已借</p>
+                                        <p th:case="30">已预约</p>
+                                        <p th:case="40">已下架</p>
+                                    </td>
+                                    <td th:text="${book.authorName}">爱德华</td>
+                                    <td th:switch="${book.ebookUrl == null or book.ebookUrl == ''}">
+                                        <a th:case="false" th:href="${book.ebookUrl}"  th:text="${book.bookName}" href="www.baidu.com">人与自然.电子书</a>
+                                        <span th:case="true"></span>
+                                    </td>
+                                    <td th:text="${book.ebookPwd}">1234</td>
+                                    <td>
+                                        <!--<button class="btn btn-info btn-xs">
+                                            <i class="ace-icon fa bigger-130">
+                                                <span style="font-size: small">详情</span>
+                                            </i>
+                                        </button>-->
+                                        <button class="btn btn-info btn-xs" th:onclick="'javascript:toUpdate('+${book.id}+');'">
+                                            <i class="ace-icon fa bigger-130">
+                                                <span style="font-size: small"> 修改</span>
+                                            </i>
+                                        </button>
+                                        <button class="btn btn-info btn-xs" th:onclick="'javascript:toBorrow('+${book.id}+');'" th:if="${book.status == 10 and book.kind == 0}">
+                                            <i class="ace-icon fa bigger-130">
+                                                <span style="font-size: small">借出</span>
+                                            </i>
+                                        </button>
+                                        <button class="btn btn-info btn-xs" th:if="${book.status == 10}" th:onclick="'javascript:down('+${book.id}+');'">
+                                            <i class="ace-icon fa bigger-130">
+                                                <span style="font-size: small"> 下架</span>
+                                            </i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer" th:include="flag::foot_flag"></div>
+
+</div><!-- /.main-container -->
+
+<div th:include="flag::script_flag"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        bindEvents();
+    });
+    function bindEvents() {
+        $("#addBtn").on("click",function (e) {
+           location.href = globalPath+"/book/toAddPage";
+        });
+        $("#queryBtn").on("click",function (e) {
+           var url = globalPath+"/book/queryList?";
+           var bookName = $.trim($("#bookName").val());
+           var bookType = $.trim($("#category").val());
+           var bookState = $.trim($("#bookState").val());
+           var bookKind = $.trim($("#bookKind").val());
+           if(bookName){
+               url+=("bookName="+bookName);
+           }
+           if(bookType){
+               url+=("&type="+bookType);
+           }
+           if(bookState){
+               url+=("&status="+bookState)
+           }
+            if(bookKind){
+                url+=("&kind="+bookKind)
+            }
+           location.href = url;
+        });
+    };
+    function toUpdate(bookId) {
+        location.href = globalPath+"/book/toUpdate/"+bookId;
+    }
+    function down(bookId) {
+        if(confirm("确认下架该书吗?")){
+            location.href=globalPath+"/book/save?id="+bookId+"&status=40";
+        }
+    }
+    function toBorrow(bookId) {
+        location.href = globalPath+"/borrow/toBorrowAddPage/"+bookId;
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<import src="../../component/component" />
+<view class="page">
+    <view>
+        <view>
+            <!-- <view class="list-title">全部电子书</view> -->
+            <view class="list">
+                <navigator wx:for="{{bookList}}"  url="../bookDetail/bookDetail?id={{item.id}}" class="list-item">
+                    <image mode="aspectFit" src="{{item.img?item.img:defaultImg}}"></image>
+                    <view>{{item.bookName}}</view>
+                    <view></view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view>
+    </view>
+    <view class="container">
+        <template is="zan-loadmore" wx:if='{{loadingBook}}' data="{{ loading: true }}" />
+        <template is="zan-loadmore" wx:if='{{isLastBook}}' data="{{ nomore: true }}" />
+    </view>
+</view>
+<wxs module="util">
+    var sliceBooklist=function(list){
+        return list.slice(0,6)
+    }
+    module.exports = {
+        sliceBooklist : sliceBooklist,
+    }
+</wxs>

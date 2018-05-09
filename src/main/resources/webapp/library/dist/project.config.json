@@ -1,0 +1,70 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wx47c489aa72780b44",
+	"projectname": "library",
+	"svr": "",
+	"client": "",
+	"qcloudRoot": "",
+	"miniprogramRoot": "",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "我的页面",
+					"pathName": "pages/mine/mine",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "图书详情",
+					"pathName": "pages/bookDetail/bookDetail",
+					"query": "id=11"
+				},
+				{
+					"id": -1,
+					"name": "信息",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登陆",
+					"pathName": "pages/login/login",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "1",
+					"pathName": "pages/index/index",
+					"query": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,35 @@
+.list-title{
+    border-left: 5rpx solid #03a9f4;
+    height: 60rpx;
+    line-height: 60rpx;
+    align-self: flex-end
+
+}
+.list{
+    display: flex;
+   
+    justify-content:space-around;
+    flex-wrap:wrap;
+    align-content:flex-start;
+    box-sizing: border-box;
+    padding: 28rpx ;
+    background: #fff;
+
+    .list-item{
+        width: 30%;
+        padding-bottom: 25rpx;
+        image{
+            width: 200rpx;
+            height: 280rpx;
+        }
+        view{
+            font-size: 25rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 900;
+            text-align: center;
+        }
+    }
+    
+}

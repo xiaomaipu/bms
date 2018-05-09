@@ -1,0 +1,43 @@
+{
+
+	"pages": [
+		"pages/index/index",
+		"pages/login/login",
+		"pages/mine/mine",
+		"pages/detail/detail",
+		"pages/bookDetail/bookDetail",
+		"pages/ebook/ebook"
+	],
+	"window": {
+		"backgroundTextStyle": "dark",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "嗨小图",
+		"navigationBarTextStyle": "black",
+		"backgroundColor": "#fff",
+		"navigationStyle": "default"
+	},
+	"tabBar": {
+		"color": "#787170",
+		"selectedColor": "#03a9f4",
+		"borderStyle": "white",
+		"backgroundColor": "#fff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "image/library.png",
+			"selectedIconPath": "image/library-select.png",
+			"text": "首页"
+		},{
+			"pagePath": "pages/ebook/ebook",
+			"iconPath": "image/eBook.png",
+			"selectedIconPath": "image/eBook-select.png",
+			"text": "电子书"
+		},{
+			"pagePath": "pages/mine/mine",
+			"iconPath": "image/mine.png",
+			"selectedIconPath": "image/mine-select.png",
+			"text": "我的"
+		}]
+
+	}
+
+}

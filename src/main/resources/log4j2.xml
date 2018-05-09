@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%-5p] %c(%L) - %m%n" />
+        </Console>
+
+        <RollingFile name="errorFile" fileName="log/error/error.log" filePattern="log/error/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%d [%-5p] %c(%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+
+        <RollingFile name="infoFile" fileName="log/info/info.log" filePattern="log/info/info-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%d [%-5p] %c(%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+
+        <RollingFile name="warnFile" fileName="log/warn/warn.log" filePattern="log/warn/warn-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%d [%-5p] %c(%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+
+        <RollingFile name="debugFile" fileName="log/debug/debug.log" filePattern="log/debug/debug-%d{yyyy-MM-dd}-%i.log.gz">
+            <Filters>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout pattern="%d [%-5p] %c(%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!--<Logger name="org.springframework" level="warn" />-->
+        <!--<Logger name="com.imxiaomai.bms" level="error" additivity="true">
+            <AppenderRef ref="errorFile" />
+        </Logger>-->
+        <!--<Logger name="com.imxiaomai.bms" level="info" additivity="true">
+            <AppenderRef ref="infoFile" />
+        </Logger>-->
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="debugFile" />
+            <AppenderRef ref="warnFile" />
+            <AppenderRef ref="errorFile" />
+            <AppenderRef ref="infoFile" />
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,248 @@
+// page{
+//     background: #fff
+// }
+// .weui-search-bar {
+//     position: relative;
+//     padding: 8px 10px;
+//     display: -webkit-box;
+//     display: -webkit-flex;
+//     display: flex;
+//     box-sizing: border-box;
+//     background-color: #fff;
+//     border-top: 1rpx solid #d7d6dc;
+//     border-bottom: 1rpx solid #d7d6dc
+// }
+// .weui-icon-search {
+//     margin-right: 8px;
+//     font-size: inherit
+// }
+// .weui-icon-search_in-box {
+//     position: absolute;
+//     left: 10px;
+//     top: 7px
+// }
+// .weui-search-bar__text {
+//     display: inline-block;
+//     font-size: 14px;
+//     vertical-align: middle
+// }
+// .weui-search-bar__form {
+//     position: relative;
+//     -webkit-box-flex: 1;
+//     -webkit-flex: auto;
+//     flex: auto;
+//     border-radius: 5px;
+//     background: rgba(243,245,246,1);;
+//     border: 1rpx solid #e6e6ea
+// }
+// .weui-search-bar__box {
+//     position: relative;
+//     padding-left: 30px;
+//     padding-right: 30px;
+//     width: 100%;
+//     box-sizing: border-box;
+//     z-index: 1
+// }
+// .weui-search-bar__input {
+//     height: 28px;
+//     line-height: 28px;
+//     font-size: 14px
+// }
+// .weui-icon-clear {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     padding: 7px 8px;
+//     font-size: 0
+// }
+// .weui-search-bar__label {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     z-index: 2;
+//     border-radius: 3px;
+//     text-align: center;
+//     color: #9b9b9b;
+//     background: #fff;
+//     line-height: 28px;
+//     width:680rpx;
+// height:68rpx; 
+// background:rgba(243,245,246,1);
+// border-radius: 44rpx ;
+// }
+// .weui-search-bar__cancel-btn {
+//     margin-left: 10px;
+//     line-height: 28px;
+//     color: #03a9f4;
+//     white-space: nowrap
+// }
+// .content{
+//     background: #fff;
+//     margin-bottom: 30rpx;
+// }
+// .list-title{
+//     border-left: 5rpx solid #03a9f4;
+//     height: 60rpx;
+//     line-height: 60rpx;
+//     align-self: flex-end
+// }
+// .list{
+//     display: flex;
+//     justify-content:space-around;
+//     flex-wrap:wrap;
+//     align-content:flex-start;
+//     box-sizing: border-box;
+//     padding: 28rpx ;
+//     background: #fff;
+//     .list-item{
+//         width: 30%;
+//         padding-bottom: 25rpx;
+//         image{
+//             width: 200rpx;
+//             height: 280rpx;
+//         }
+//         view{
+//             font-size: 25rpx;
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             white-space: nowrap;
+//             font-weight: 900;
+//             text-align: center;
+//         }
+//     }
+// }
+// .searchCon{
+//     min-height: 200rpx;
+// }
+.searchCom {
+    width: 680rpx;
+    height: 68rpx;
+    background: rgba(243, 245, 246, 1);
+    border-radius: 44rpx;
+    margin: 20rpx auto;
+    text-align: center;
+    margin-bottom: 50rpx;
+    line-height: 68rpx;
+    image {
+        width: 26rpx;
+        height: 26rpx;
+        margin-right: 12rpx;
+    }
+    text {
+        font-size: 28rpx;
+        color: #BBBBBB;
+        line-height: 68rpx;
+    }
+}
+
+.searchActive {
+    width: 680rpx;
+    height: 68rpx; // background: rgba(243, 245, 246, 1);
+    // border-radius: 44rpx;
+    margin: 20rpx auto;
+    margin-bottom: 50rpx;
+    line-height: 68rpx;
+    box-sizing: border-box; // padding-left: 20rpx;
+    .left {
+        background: rgba(243, 245, 246, 1);
+        border-radius: 44rpx;
+        height: 68rpx;
+        width: 75%;
+        padding-left: 20rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        float: left;
+        .icon {
+            width: 26rpx;
+            height: 26rpx;
+            margin-right: 20rpx;
+            margin-top: -8rpx;
+        }
+        input {
+            width: 80%;
+            height: 68rpx;
+            line-height: 68rpx;
+            display: inline-block;
+            border-bottom-right-radius: 44rpx;
+            border-top-right-radius: 44rpx;
+            color: #BBBBBB;
+        }
+        .input-placeholder {
+            font-size: 28rpx;
+            color: #BBBBBB;
+            line-height: 68rpx;
+        }
+    }
+    .right{
+        width: 20%;
+        height: 68rpx;
+        background: rgba(243, 245, 246, 1);
+        float: right;
+        font-size:28rpx; 
+        border-radius: 44rpx;
+        text-align: center;
+        color: rgba(74,144,226,1);
+        font-weight:900;
+
+    }
+}
+
+.bookCom {
+    border-bottom: 1rpx solid #EEEEEE;
+    margin-bottom: 30rpx;
+    .category {
+        height: 45rpx;
+        color: rgba(74, 144, 226, 1);
+        text-align: center;
+        font-size: 32rpx;
+        margin-bottom: 36rpx;
+        text:nth-child(1) {
+            height: 45px;
+            font-family: SFNSDisplay;
+            line-height: 38rpx;
+        }
+    
+        text:nth-child(3) {
+            font-weight: 900
+        }
+    }
+    .bookList {
+        box-sizing: border-box;
+        padding: 0 36rpx;
+        width: 100%;
+        overflow: hidden; // display: flex;
+        // flex-direction: row;
+        // justify-content: space-between;
+        .bookItem {
+            margin-bottom: 63rpx;
+            width: 196rpx;
+            margin-right: 45rpx;
+            float: left;
+            image {
+                width: 196rpx;
+                height: 280rpx;
+                box-shadow: 0 15rpx 30rpx rgba(0, 0, 0, 0.1);
+            }
+            .title {
+                display: block;
+                margin-top: 26rpx;
+                width: 196rpx;
+                height: 68rpx;
+                font-size: 24rpx;
+                font-family: PingFangSC-Medium;
+                color: rgba(51, 51, 51, 1);
+                line-height: 33rpx;
+                overflow: hidden;
+                text-overflow: ellipsis; // white-space: nowrap;
+                word-wrap: break-word;
+                word-break: break-all;
+            }
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+        }
+    }
+}

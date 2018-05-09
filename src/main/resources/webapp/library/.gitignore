@@ -1,0 +1,10 @@
+
+
+# Dependency directories
+node_modules
+
+# OS temps
+.DS_Store
+
+
+/build

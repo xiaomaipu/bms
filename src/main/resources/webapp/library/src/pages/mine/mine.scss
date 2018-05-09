@@ -1,0 +1,118 @@
+#mine_page {
+    .userInfo {
+       
+        background: rgba(255, 255, 255, 1);
+        opacity: 90;
+        position: relative;
+        img {
+            
+            position:absolute;
+            top: 0px;
+            left:0px;
+        }
+
+        #logo {
+            position:absolute;
+            top: 60rpx;
+            left:313rpx;
+            width: 134rpx;
+            height: 134rpx;
+            background: rgba(74, 144, 226, 1);
+            display: block;
+            margin: 60rpx auto;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 48rpx;
+            font-family: PingFangSC-Medium;
+            color: rgba(255, 255, 255, 1);
+            line-height: 67rpx;
+        }
+        #name {
+            position:absolute;
+            top: 274rpx;
+            width:100%;
+            display: block;
+            font-size: 28rpx;
+            font-family: PingFangSC-Medium;
+            color: rgba(74, 144, 226, 1);
+            line-height: 40rpx;
+            text-align: center;
+        }
+    }
+
+    .list_type {
+        display: block;
+        color: gray;
+        line-height: 80rpx;
+    }
+    .mybook {
+        clear: both;
+        width: 750rpx;
+    }
+    .book_style {
+        width: 195rpx;
+        height: 273rpx;
+        margin-left: 46rpx;
+        float: left;
+        margin-top: 45rpx;
+
+        image {
+            width: 195rpx;
+            height: 273rpx;
+            box-shadow: 0 15rpx 30rpx rgba(0, 0, 0, 0.1);
+        }
+        .bookname {
+            color: rgba(51, 51, 51, 1);
+            display: block;
+            width: 195rpx;
+            font-size: 24rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 50rpx;
+        }
+        .booktype {
+            display: block;
+            width: 200rpx;
+            font-size: 28rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 50rpx;
+        }
+    }
+}
+
+.em_msg {
+    text-align: center;
+    color: #d1d1d1;
+}
+
+
+
+
+
+/******/
+
+#list {
+    ul {
+        li {
+            display: inline-block;
+            list-style: none;
+            width: 187.5rpx;
+            text-align: center;
+            border-bottom: red 2rpx #f2f2f2;
+        }
+    }
+}
+
+.nomal {
+    border-bottom: 2rpx solid #f2f2f2;
+    color: rgba(187, 187, 187, 1);
+}
+
+.select_style {
+    border-bottom: 2rpx solid rgba(74, 144, 226, 1);
+    color: rgba(74, 144, 226, 1);
+    ;
+}

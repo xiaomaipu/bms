@@ -1,0 +1,51 @@
+<wxs module="dateFr" src="../../js/filter.wxs"></wxs>
+<view id="bookmsg_page">
+    <div id="page_view">
+    <image class="bookImg" mode="aspectFill" src="{{bookmsg.img}}"></image>
+    <div class="bookInfo">
+        <label class="bookType">{{bookmsg.bookName}}</label>
+        <label class="bookDes">{{bookmsg.authorName}}</label>
+        <label class="bookName">{{msg}}{{bookmsg.borrowNum-bookmsg.pastDay}}日</label>
+        <view id="col_view">
+            <image class='col_img' bindtap="checkAction" data-code="{{bookmsg.id}}" data-type="{{bookmsg.isColl}}"  mode="aspectFill" src="../../image/{{col_style}}.png"></image>
+           <!--  <label class='{{col_style}}' data-code="{{bookmsg.id}}" data-type="{{bookmsg.isColl}}" bindtap="checkAction">{{col_msg}}</label> -->
+            <label class='col_msg'>{{bookmsg.collNum>0?bookmsg.collNum:0}}人已收藏</label>
+        </view>
+    </div>
+    </div>
+   <div style='width: 100%;height: 1px;clear: both;'></div> 
+   <div id="msg">
+     <div>内容介绍:</div>
+     <div>{{bookmsg.bookDes}}</div>
+      <view wx:if="{{bookmsg.ebookUrl}}">
+        下载地址:
+        <span style='font-size: 24rpx;color:#4a90e2;word-wrap:break-word;'>
+        {{bookmsg.ebookUrl}}
+    </span>
+    </view>
+      <view wx:if="{{bookmsg.ebookPwd}}">
+        密码:
+        <span style='font-size: 24rpx;color:#4a90e2;word-wrap:break-word;'>
+    {{bookmsg.ebookPwd}}
+  </span>
+    </view>
+   </div>
+   <div class="line"></div>
+   
+  
+    
+
+    <div id="note">
+     <label>全部评论:<span>{{colList.length}}</span></label>
+     <view id="comments" wx:for="{{colList}}">
+       <label class="speak_style"><span class="name_style">{{dateFr.getName(item.nickName)}}</span><span class="msg_style">{{item.content}}</span></label> 
+         
+    </view>
+  
+     <view style='width: 100%;height: 100rpx;clear: both;'></view>
+    </div>
+</view>
+<view id='talk'>
+        <textarea bindinput="bindTextAreaBlur"   placeholder="请输入评论" fixed="true" />
+        <label id="talkB" bindtap="talkAction">提交</label>
+    </view>

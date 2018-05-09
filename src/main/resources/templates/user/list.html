@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="flag::head_flag('图书管理系统')"></head>
+<body class="no-skin">
+<style>
+    .margin-right{
+        margin-right: 20px;
+    }
+</style>
+<div id="navbar" class="navbar navbar-default ace-save-state" th:include="flag::navbar-flag(${#httpServletRequest.remoteUser})">
+    <!--navbar-->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <div th:include="flag::menu_flag" id="sidebar" class="sidebar responsive ace-save-state"></div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">用户</a>
+                    </li>
+                    <li class="active">用户列表</li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4 class="widget-title">用户列表</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <button class="btn btn-sm " type="button" id="addBtn">
+                                <i class="ace-icon fa fa-plus"></i>
+                                新增
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div>
+                            <table id="tb-header" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center">
+                                        序号
+                                    </th>
+                                    <th>用户名</th>
+                                    <th>昵称</th>
+                                    <th>手机号</th>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+
+                                <tbody id="tb-info">
+                                <tr th:each="user,userState:${userPage.list}">
+                                    <td class="center" th:text="${userState.index + 1}">
+                                        1
+                                    </td>
+                                    <td th:text="${user.userName}" sid="username">科技类</td>
+                                    <td th:text="${user.nickName}">20</td>
+                                    <td th:text="${user.mobile}">20</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" th:onclick="'javascript:toUpdate(this);'">
+                                            <i class="ace-icon fa bigger-130">
+                                                <span style="font-size: small">修改</span>
+                                            </i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer" th:include="flag::foot_flag"></div>
+
+</div><!-- /.main-container -->
+
+<div th:include="flag::script_flag"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        bindEvents();
+    });
+    function bindEvents() {
+        $("#addBtn").on("click",function (e) {
+            location.href = "/user/toAddPage";
+        });
+    }
+    function toUpdate(dom) {
+        var userName = $(dom).parent().parent().find("[sid=username]").text();
+        location.href = globalPath+"/user/toUpdatePage/"+userName;
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

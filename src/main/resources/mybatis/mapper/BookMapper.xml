@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imxiaomai.bms.mapper.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.imxiaomai.bms.entity.Book" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="book_des" property="bookDes" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="kind" property="kind" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="borrow_num" property="borrowNum" jdbcType="INTEGER" />
+    <result column="author_name" property="authorName" jdbcType="VARCHAR" />
+    <result column="author_des" property="authorDes" jdbcType="VARCHAR" />
+    <result column="ebook_url" property="ebookUrl" jdbcType="VARCHAR" />
+    <result column="ebook_pwd" property="ebookPwd" jdbcType="VARCHAR" />
+    <result column="borrow_num" property="borrowNum" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="BIT" />
+    <result column="name" property="typeName" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+
+
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.Book">
+    SELECT bk.id,bk.book_name,bk.book_des,bk.img,bk.type,bk.kind,bk.status,bk.author_name,bk.author_des,bk.ebook_url,bk.ebook_pwd,bk.borrow_num,bk.creator,bk.updator,bk.created,bk.updated,bk.yn,bt.name
+    FROM
+    book bk
+    LEFT JOIN book_type  bt on bk.type = bt.type
+    where 1=1  AND bk.status != 40 AND bk.yn = 1
+    <if test="status != null and status != ''">
+      and  bk.status = #{status}
+    </if>
+    <if test="bookName != null and bookName != ''">
+      and  bk.book_name like '%${bookName}%'
+    </if>
+    <if test="type != null and type != ''">
+      and  bk.type like '%${type}%'
+    </if>
+    <if test="kind != null">
+      AND  bk.kind = #{kind}
+    </if>
+    ORDER BY bk.id DESC
+  </select>
+
+
+  <select id="selectDetail" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.Book">
+    SELECT bk.id,bk.book_name,bk.book_des,bk.img,bk.type,bk.status,bk.author_name,bk.author_des,bk.ebook_url,bk.ebook_pwd,bk.borrow_num,bk.creator,bk.updator,bk.created,bk.updated,bk.yn,bt.name
+    FROM
+    book bk
+    LEFT JOIN book_type  bt on bk.type = bt.type
+    where bk.id = #{id}
+     </select>
+
+  <insert id="saveBook" parameterType="com.imxiaomai.bms.entity.Book" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO book (
+      book_name,
+      book_des,
+      img,
+      TYPE,
+      kind,
+      STATUS,
+      author_name,
+      author_des,
+      ebook_url,
+      ebook_pwd,
+      borrow_num,
+      creator,
+      updator,
+      created,
+      updated,
+      yn
+    )VALUES(
+      #{bookName},
+      #{bookDes},
+      #{img},
+      #{type},
+      #{kind},
+      #{status},
+      #{authorName},
+      #{authorDes},
+      #{ebookUrl},
+      #{ebookPwd},
+      #{borrowNum},
+      #{creator},
+      #{updator},
+      #{created},
+      #{updated},
+      1
+  )
+  </insert>
+
+
+  <!-- 更新图书状态-->
+  <update id="update" parameterType="com.imxiaomai.bms.entity.BookType" >
+    update book
+    <set >
+      <if test="status != null" >
+        status = #{status},
+      </if>
+      updated = now(),
+      updator = #{updator}
+    </set>
+      where id = #{id}
+  </update>
+
+
+  <select id="queryListByType" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.Book">
+    SELECT bk.id,bk.book_name,bk.book_des,bk.img,bk.type,bk.status,bk.author_name,bk.author_des,bk.ebook_url,bk.ebook_pwd,bk.borrow_num,bk.creator,bk.updator,bk.created,bk.updated,bk.yn
+    FROM
+    book bk
+    where bk.type = #{type}
+    limit 1
+  </select>
+
+
+  <insert id="saveBd" parameterType="com.imxiaomai.bms.entity.BookDiscuss" keyProperty="id" useGeneratedKeys="true">
+    INSERT INTO book_discuss (
+    book_id,
+    user_id,
+    content,
+    creator,
+    updator,
+    created,
+    updated,
+    yn
+    )VALUES(
+    #{bookId},
+    #{userId},
+    #{content},
+    #{creator},
+    #{updator},
+    now(),
+    #{updated},
+    #{yn}
+    )
+  </insert>
+
+
+  <resultMap id="BookDiscussResultMap" type="com.imxiaomai.bms.entity.BookDiscuss" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="queryBookDisucssList" resultMap="BookDiscussResultMap" parameterType="com.imxiaomai.bms.entity.BookDiscuss">
+    SELECT
+    bd.book_id,
+    bd.user_id,
+    bd.content,
+    bd.created,
+    u.nick_name,
+    u.user_name
+    FROM
+    book_discuss bd
+    LEFT JOIN users  u on u.id = bd.user_id
+    where 1=1
+    <if test="userId != null and userId != ''">
+      and  bd.user_id = #{userId}
+    </if>
+    <if test="bookId != null and bookId != ''">
+      and  bd.book_id = #{bookId}
+    </if>
+    ORDER BY bd.id DESC
+  </select>
+
+
+  <select id="queryCollNum" resultType="java.lang.Integer" parameterType="com.imxiaomai.bms.entity.Book">
+   select count(id) from users_book_collect where book_id=#{id} and type = 1
+  </select>
+
+  <select id="queryCollNumByUser" resultType="java.lang.Integer" parameterType="com.imxiaomai.bms.entity.Book">
+    select count(id) from users_book_collect where book_id=#{id} and user_id = #{userId} and type = 1
+  </select>
+</mapper>

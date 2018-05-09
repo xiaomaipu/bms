@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="flag::head_flag('图书管理系统')"></head>
+<body class="no-skin">
+<style>
+    .margin-right {
+        margin-right: 20px;
+    }
+    .custom-center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .width1000{
+        width: 1000px;
+    }
+    label.error{
+        color: red;
+    }
+</style>
+<link rel="stylesheet" th:href="@{/assets/css/dropzone.min.css}" />
+<div id="navbar" class="navbar navbar-default ace-save-state"
+     th:include="flag::navbar-flag(${#httpServletRequest.remoteUser})">
+    <!--navbar-->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <div th:include="flag::menu_flag" id="sidebar" class="sidebar responsive ace-save-state"></div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">图书</a>
+                    </li>
+                    <li class="active">图书管理</li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        图书管理
+                        <small>
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                            新增图书
+                        </small>
+                    </h1>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal" method="post" action="/book/save" id="bookAddForm">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="bookName"> 图书名称 </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="bookName" name="bookName" placeholder="图书名称"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="bookType"> 图书分类 </label>
+
+                            <div class="col-sm-8">
+                                <select id="bookType" name="type">
+                                    <option th:each="bookType : ${bookTypes}" th:attr="value=${bookType.type}" th:text="${bookType.name}">科技</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="bookType">是否纸质书 </label>
+
+                            <div class="col-sm-8">
+                                    <input type="radio" id="common_book" name="kind" checked="true" value="0"/> 纸质书
+                                    <input type="radio" id="e_book" name="kind" value="1"/> 电子书
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="coverImgUrl"> 封面地址 </label>
+                            <div class="col-sm-8">
+                                <input type="text" id="coverImgUrl" name="img" placeholder="封面地址"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="authorName"> 作者名称 </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="authorName" name="authorName" placeholder="作者名称"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="eBookUrl"> 电子版链接 </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="eBookUrl" name="ebookUrl" placeholder="电子版链接"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="eBookPwd"> 电子版密码 </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="eBookPwd" name="ebookPwd" placeholder="电子版密码"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="canBorrowDays"> 可借天数 </label>
+
+                            <div class="col-sm-8">
+                                <input type="text" id="canBorrowDays" name="borrowNum" placeholder="可借天数"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="bookEditorArea"> 图书简介 </label>
+                            <div class="col-sm-8">
+                                <textarea class="col-xs-10 col-sm-5" id="bookEditorArea" name="bookDes" rows="3"  placeholder="图书简介"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="authorEditorArea"> 作者简介 </label>
+                            <div class="col-sm-8">
+                                <textarea class="col-xs-10 col-sm-5" id="authorEditorArea" name="authorDes" rows="3"  placeholder="作者简介"></textarea>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div style="width: 297px" class="custom-center">
+                                <button class="btn btn-info" type="button" id="submitBtn">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    提交
+                                </button>
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset" id="cancleBtn">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer" th:include="flag::foot_flag"></div>
+
+</div><!-- /.main-container -->
+
+<div th:include="flag::script_flag"></div>
+<script>
+    /*<![CDATA[*/
+    $(function () {
+        $("#bookAddForm").validate({
+            rules:{
+                bookName:{
+                    required:true
+                },
+                img:{
+                    required:false,
+                    url:true
+                },
+                authorName:{
+                    required:true
+                },
+                ebookUrl:{
+                    bookKindRequire:{
+                      e_book: true
+                    },
+                    url:true
+                },
+                borrowNum:{
+                    bookKindRequire:{
+                        paper_book: true
+                    },
+                    regex:/^[1-9]+[0-9]*$/
+                },
+                ebookPwd:{
+                    required:false,
+                    numOrABC:true
+                }
+            },
+            messages:{
+                bookName:{
+                    required:"*必填！",
+                },
+                img:{
+                    url:"必须为合法的url地址"
+                },
+                authorName:{
+                    required:"*必填！",
+                },
+                eBookUrl:{
+                    url:"必须为合法的url地址"
+                }
+            }
+        });
+        $.validator.addMethod("numOrABC",function (value,element,params) {
+            var reg = /^\d\w$/;
+            return this.optional(element) || reg.test(value);
+        },"输入字符必须为数字或字母");
+
+        $.validator.addMethod("regex",function (value,element,params) {
+            if(!value){
+                return true;
+            }
+            var exp = new RegExp(params);
+            return exp.test(value);       //value  被验证的input传入的值
+        },"输入格式有误");
+
+        $.validator.addMethod("bookKindRequire",function (value,element,params) {
+            /*
+            * params={
+            *       e_book:true,
+            *       paper_book:false
+            *   }
+            */
+            var bookKind = parseInt($("input[name=kind]:checked").val());
+            if (value){
+                return true;
+            }
+            if (bookKind){
+                return !params["e_book"];
+            }else{
+                return !params["paper_book"];
+            }
+        },"*必填");
+
+        $("#submitBtn").on("click",function () {
+            $("#bookAddForm").submit();
+        })
+        $("#cancleBtn").on("click",function () {
+            location.href = globalPath+"/book/queryList"
+        })
+    })
+    /*]]>*/
+</script>
+</body>
+</html>

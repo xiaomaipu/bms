@@ -1,0 +1,204 @@
+page{
+    position:relative;
+}
+#bookmsg_page {
+    width: 730rpx;
+    margin: 10rpx;
+    #page_view {
+        display: block;
+        width: 196rpx;
+        height: 300rpx;
+        position: relative;
+    }
+    .bookImg {
+        position: absolute;
+        width: 196rpx;
+        height: 300rpx;
+        left: 36rpx;
+        top: 0px;
+    }
+    .bookInfo {
+        position: absolute;
+        width: 440rpx;
+        height: 300rpx;
+        left: 271rpx;
+        .bookType {
+            height: 128rpx;
+            font-size: 44rpx;
+            overflow: hidden;
+        }
+        .bookDes {
+            height: 50rpx;
+            overflow: hidden;
+            line-height: 25rpx;
+            font-size: 20rpx;
+            overflow: hidden;
+            margin-top: 20rpx;
+        }
+        .bookName {
+            margin-top: 20rpx;
+            height: 28rpx;
+            font-size: 20rpx;
+            font-family: PingFangSC-Medium;
+            color: rgba(187, 187, 187, 1);
+            line-height: 28rpx;
+        }
+        label {
+            display: block;
+        }
+    }
+
+
+    input {
+        border: 1rpx solid gray;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 4px;
+        width: 730rpx;
+    }
+    button {
+        width: 200rpx;
+        height: 30px;
+        font-size: 40rpx;
+        line-height: 30px;
+        float: right;
+        margin-top: 10px;
+    }
+}
+
+
+#col_view {
+    width: 200rpx;
+    height: 120rpx;
+    float: right;
+    margin-right: 20rpx;
+    .col_img {
+        width: 66rpx;
+        height: 66rpx;
+        margin-left: 66rpx;
+    }
+    .collection {
+        background: red;
+        width: 200rpx;
+        height: 60rpx;
+        line-height: 60rpx;
+        text-align: center;
+        display: block;
+        color: white;
+    }
+    .noCollection {
+        background: gray;
+        width: 200rpx;
+        height: 60rpx;
+        line-height: 60rpx;
+        text-align: center;
+        display: block;
+    }
+    .col_msg {
+        width: 200rpx;
+        display: block;
+        text-align: center;
+        font-size: 27rpx;
+        text-align: center;
+    }
+}
+
+
+
+
+
+#msg {
+    display: block;
+    width: 678rpx;
+    font-size: 24rpx;
+    margin-left: 36rpx;
+    font-family: PingFangSC-Medium;
+    color: rgba(153, 153, 153, 1);
+    line-height: 44rpx;
+    clear: both;
+    margin-top: 40rpx;
+    div {
+        display: block;
+    }
+}
+
+#talk {
+    width: 750rpx;
+    position: fixed;
+    background:white;
+    height:78rpx;
+    bottom: 0px;
+    z-index: 666;
+    textarea {
+        margin-left: 36rpx;
+        width: 508rpx;
+        height: 68rpx;
+        background: rgba(243, 245, 246, 1);
+        border-radius: 44rpx;
+        line-height: 68rpx;
+        position:absolute;
+        }
+    #talkB {
+        position:absolute;
+        right:36rpx;
+        font-size: 30rpx;
+        width: 140rpx;
+        height: 68rpx;
+        background: rgba(74, 144, 226, 1);
+        border-radius: 44rem;
+        font-family: PingFangSC-Medium;
+        color: rgba(255, 255, 255, 1);
+        margin-right: 36rpx;
+        text-align: center;
+        line-height: 68rpx;
+    }
+}
+
+#comments {}
+
+.item_style {
+   
+}
+
+#note {
+    display: block;
+    margin-top: 100rpx;
+    width: 678rpx;
+    margin-left: 36rpx;
+    label {
+        color: rgba(51, 51, 51, 1);
+        span {
+            margin-left: 10rpx;
+            color: #d1d1d1;
+        }
+    }
+    .speak_style {
+        display:block;
+        margin-top:10px;
+        line-height: 66rpx;
+        position:relative;
+    }
+    .name_style {
+        display:inline-block;
+        width: 66rpx;
+        height: 66rpx;
+        overflow: hidden;
+        text-align: center;
+        line-height: 66rpx;
+        background: rgba(74, 144, 226, 1);
+        font-size: 20rpx;
+        border-radius: 50%;
+        position:absolute;
+    }
+    .msg_style {
+        margin-left:80rpx;
+        width:600rpx;
+        display:inline-block;
+        height: 66rpx;
+        font-size: 28rpx;
+        font-family: PingFangSC-Medium;
+        color: rgba(137, 137, 137, 1);
+        line-height: 66rpx;
+        word-wrap: break-word;
+    }
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imxiaomai.bms.mapper.BookUserRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.imxiaomai.bms.entity.BookUserRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="des" property="des" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <resultMap id="BaseResultMapBorrow" type="com.imxiaomai.bms.entity.BorrowBook" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.BorrowBook">
+    SELECT bur.id, bur.book_id, bur.user_id, bur.des,bur.creator,bur.updator,bur.created,bur.updated,bur.yn,u.mobile,u.user_name
+    FROM
+    book_user_record bur
+    LEFT JOIN users  u on bur.user_id = u.id
+    where bur.book_id = #{bookId}
+    ORDER BY bur.id DESC
+  </select>
+
+  <select id="selectDetailListByExample" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.BookUserRecord">
+    SELECT
+      b.book_name,
+      b.img,
+      bu.des,
+      bu.book_id,
+      bu.user_id,
+      u.user_name,
+      u.mobile
+    FROM
+      book b
+      INNER JOIN book_user_record bu
+        ON b.id = bu.book_id
+      INNER JOIN users u
+        ON bu.user_id = u.id
+    WHERE bu.yn = 1
+    <if test="bookId != null">
+      and bu.book_id = #{bookId}
+    </if>
+    <if test="userId != null">
+      and bu.user_id = #{userId}
+    </if>
+    ORDER BY bu.created DESC
+  </select>
+
+
+  <select id="queryListBorrow" resultMap="BaseResultMapBorrow" parameterType="com.imxiaomai.bms.entity.BorrowBook">
+   SELECT bb.id, bb.book_id, bb.user_id, bb.status,bb.creator,bb.updator,bb.created,bb.updated,bb.yn,u.mobile,u.user_name
+    FROM
+    borrow_book bb
+    LEFT JOIN users  u on bb.user_id = u.id
+    where bb.book_id = #{bookId}
+    ORDER BY bb.id DESC
+     </select>
+
+
+
+  <select id="queryListBorrowByUserId" resultMap="BaseResultMapBorrow" parameterType="com.imxiaomai.bms.entity.Book">
+    SELECT bb.id, bb.book_id, bb.user_id, bb.status,bb.creator,bb.updator,bb.created,bb.updated,bb.yn,u.mobile,u.user_name
+    FROM
+    borrow_book bb
+    LEFT JOIN users  u on bb.user_id = u.id
+    where bb.user_id = #{userId}
+    ORDER BY bb.id DESC
+    </select>
+
+  <select id="isWriterecorded" resultMap="BaseResultMap" parameterType="com.imxiaomai.bms.entity.BookUserRecord">
+    SELECT bur.id, bur.book_id, bur.user_id, bur.des,bur.creator,bur.updator,bur.created,bur.updated,bur.yn
+    FROM
+    book_user_record bur
+    where bur.book_id = #{bookId} and bur.user_id = #{userId}
+     limit 1
+  </select>
+
+
+  <insert id="save" parameterType="com.imxiaomai.bms.entity.BookUserRecord">
+    insert book_user_record(book_id,user_id ,des,creator,updator,created,updated,yn)
+    values (#{bookId}, #{userId}, #{des}, #{creator},#{updator}, now(), null, #{yn})
+  </insert>
+</mapper>

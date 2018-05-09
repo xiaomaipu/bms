@@ -1,0 +1,7 @@
+var formatNum=function(n){
+    console.log('formatNum:',n)
+    return (n+1)
+}
+module.exports = {
+    formatNum: formatNum
+}

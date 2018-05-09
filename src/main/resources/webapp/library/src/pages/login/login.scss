@@ -1,0 +1,53 @@
+page{
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 100rpx;
+}
+.title {
+    height: 64rpx;
+    font-size: 56rpx;
+    font-family: SFNSDisplay;
+    color: rgba(74, 144, 226, 1);
+    line-height: 66rpx;
+    text-align: center;
+   
+}
+
+.form {
+    margin: 0 auto;
+    margin-top: 180rpx;
+    width: 528rpx;
+    input {
+        width: 528rpx;
+        height: 98rpx;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 50rpx;
+        margin-bottom: 30rpx;
+        border: 1rpx solid #eee;
+        font-size:28rpx;
+        font-family:PingFangSC-Medium;
+        color:rgba(51,51,51,1);
+        line-height:98rpx;
+        box-sizing: border-box;
+        padding: 0 20rpx;
+    }
+    button{
+      width:528rpx;
+      height:98rpx; 
+      background:rgba(74,144,226,1);
+      border-radius: 50rpx ; 
+      font-size:36rpx;
+      font-family:PingFangSC-Medium;
+      color:rgba(255,255,255,1);
+      line-height:98rpx;
+    }
+}
+image{
+  position: absolute;
+  bottom: 60rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width:176rpx;
+  height:51rpx; 
+}

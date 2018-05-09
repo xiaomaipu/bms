@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imxiaomai.bms.mapper.BorrowBookMapper" >
+
+  <resultMap id="BaseResultMapBorrow" type="com.imxiaomai.bms.entity.BorrowBook" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="yn" property="yn" jdbcType="BIT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <select id="queryList" resultMap="BaseResultMapBorrow" parameterType="com.imxiaomai.bms.entity.Book">
+    SELECT bb.id, bb.book_id, bb.user_id, bb.status,bb.creator,bb.updator,bb.created,bb.updated,bb.yn,u.mobile,u.user_name,u.nick_name
+    FROM
+    borrow_book bb
+    LEFT JOIN users  u on bb.user_id = u.id
+    LEFT JOIN book  bk on bk.id = bb.book_id
+    where
+    <if test="status == null or status==''">
+      bb.status = 10
+    </if>
+    <if test="status != null and status!=''">
+      bb.status = #{status}
+    </if>
+    <if test="type != null and type != ''">
+      and bk.type=#{type}
+    </if>
+    <if test="bookName != null and bookName != ''">
+      and  bk.book_name like '%${bookName}%'
+    </if>
+    <if test="userName != null and userName != ''">
+      and u.user_name like '%${userName}%'
+    </if>
+    ORDER BY bb.id DESC
+    </select>
+
+
+  <!-- 更新-->
+  <update id="update" parameterType="com.imxiaomai.bms.entity.BorrowBook" >
+    update borrow_book
+    <set >
+      status = 20,
+      updated = now(),
+      updator = #{updator}
+    </set>
+    where id = #{id} and user_id=#{userId} and book_id=#{bookId}
+  </update>
+
+
+
+  <select id="queryBorrowBookByUser" resultMap="BaseResultMapBorrow" parameterType="com.imxiaomai.bms.entity.BookType">
+    SELECT bb.id, bb.book_id, bb.user_id, bb.status,bb.creator,bb.updator,bb.created,bb.updated,bb.yn
+    FROM
+    borrow_book bb
+    where 1=1
+    <if test="userId != null and userId != ''">
+      and bb.user_id = #{userId}
+    </if>
+    and bb.book_id=#{bookId} and bb.status = #{status}
+    limit 1
+  </select>
+
+
+
+  <insert id="save" parameterType="com.imxiaomai.bms.entity.BorrowBook" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO borrow_book (book_id, user_id, status,creator,updator,created,updated,yn)
+    VALUES (#{bookId},#{userId},#{status},#{creator},null,now(),null,1)
+  </insert>
+
+</mapper>

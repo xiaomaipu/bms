@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="flag::head_flag('图书管理系统')"></head>
+<body class="no-skin">
+<link rel="stylesheet" th:href="@{/assets/css/dropzone.min.css}" />
+<style>
+    .custom-center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<div id="navbar" class="navbar navbar-default ace-save-state"
+     th:include="flag::navbar-flag(${#httpServletRequest.remoteUser})">
+    <!--navbar-->
+</div>
+
+<div class="main-container ace-save-state" id="main-container">
+    <div th:include="flag::menu_flag" id="sidebar" class="sidebar responsive ace-save-state"></div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">分类</a>
+                    </li>
+                    <li class="active">分类修改</li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <h1>
+                        分类管理
+                        <small>
+                            <i class="ace-icon fa fa-angle-double-right"></i>
+                            修改分类
+                        </small>
+                    </h1>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal" id="categoryAddForm" action="" th:attr="action=@{/category/update}" method="post" >
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="bookName"> 分类名称 </label>
+                            <span th:text="${failMsg}"></span>
+                            <div class="col-sm-8">
+                                <input type="hidden" name="_method" value="put" />
+                                <input type="hidden" th:value="${bookType.id}" id="id" name="id" placeholder="分类id"  class="col-xs-10 col-sm-5"/>
+                                <input type="text" th:value="${bookType.name}" id="bookName" name="name" placeholder="分类名称"  class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div style="width: 297px" class="custom-center">
+                                <button class="btn btn-info" type="button" id="submitBtn">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    提交
+                                </button>
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset" id="cancleBtn">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer" th:include="flag::foot_flag"></div>
+
+</div><!-- /.main-container -->
+
+<div th:include="flag::script_flag"></div>
+<script>
+$(function () {
+    $("#categoryAddForm").validate({
+        rules:{
+            name:{
+                required:true
+            }
+        }
+    });
+    $("#submitBtn").on("click",function () {
+        $("#categoryAddForm").submit();
+    })
+    $("#cancleBtn").on("click",function () {
+        location.href = globalPath+"/category"
+    })
+})
+</script>
+</body>
+</html>

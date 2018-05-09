@@ -1,0 +1,7 @@
+{
+	"navigationBarTitleText": "电子书",
+	"onReachBottomDistance":"50px",
+	"disableScroll":false,
+	"enablePullDownRefresh":false
+
+}

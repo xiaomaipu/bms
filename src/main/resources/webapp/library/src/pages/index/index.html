@@ -1,0 +1,137 @@
+<import src="../../component/component" />
+<!-- <view class="page">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input confirm-type="search" type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" 
+                    focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm='toSearch'
+                    />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">书名</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+    </view>
+    <view >
+        <view class="searchCon content" wx:if='{{showSearchCon}}'>
+            <view class="list-title">搜索书籍</view>
+            <template is="zan-loadmore" wx:if='{{searching }}' data="{{ loading: true }}" />
+            <template is="zan-loadmore" wx:if='{{!searchList.length}}' data="{{ nodata: true }}" />
+        
+            <view class="list" >
+                <navigator wx:for="{{searchList}}" url="../bookDetail/bookDetail?id={{item.id}}" class="list-item">
+                    <image mode="aspectFit"     src="{{item.img?item.img:defaultImg}}"></image>
+                    <view>{{item.bookName}}</view>
+                    <view></view>
+                </navigator>
+                
+            </view>
+
+        </view>
+        <view class="content">
+            <view class="list-title">最新书籍</view>
+            <view class="list" >
+                <navigator wx:for="{{util.sliceBooklist(bookList)}}" url="../bookDetail/bookDetail?id={{item.id}}" class="list-item">
+                    <image mode="aspectFit"     src="{{item.img?item.img:defaultImg}}"></image>
+                    <view>{{item.bookName}}</view>
+                    <view></view>
+                </navigator>
+            </view>
+            <template is="zan-loadmore" wx:if='{{!bookList.length}}' data="{{ nodata: true }}" />
+        </view>
+        <view class="content">
+            <view class="list-title">全部书籍</view>
+            <view class="list">
+                <navigator wx:for="{{bookList}}"  url="../bookDetail/bookDetail?id={{item.id}}" class="list-item">
+                    <image mode="aspectFit" src="{{item.img?item.img:defaultImg}}"></image>
+                    <view>{{item.bookName}}</view>
+                    <view></view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view>
+    </view>
+    <view class="container">
+        <template is="zan-loadmore" wx:if='{{loadingBook}}' data="{{ loading: true }}" />
+        <template is="zan-loadmore" wx:if='{{isLastBook}}' data="{{ nomore: true }}" />
+    </view>
+</view>
+<wxs module="util">
+    var sliceBooklist=function(list){
+        return list.slice(0,6)
+    }
+    module.exports = {
+        sliceBooklist : sliceBooklist,
+    }
+</wxs> -->
+<view>
+    <view class="searchCom" hidden="{{inputShowed}}" bindtap="showInput">
+        <image src="../../image/search.png"></image>
+        <text>请输入书名</text>
+    </view>
+    <view class="searchActive" hidden="{{!inputShowed}}">
+        <view class="left">
+            <icon class="icon" type="search" size="14"></icon>
+            <input confirm-type="search" type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}"
+                bindinput="inputTyping" bindconfirm='toSearch' />
+        </view>
+
+        <view class="right" bindtap="hideInput">取消</view>
+    </view>
+    <view class="bookCom" hidden='{{!showSearchCon}}'>
+            <view class="category">
+                <text>搜索书籍 </text>
+                <text>/</text>
+                <text> SEARCH</text>
+            </view>
+            <view class="bookList">
+                <navigator class="bookItem" wx:for="{{searchList}}"  url="../bookDetail/bookDetail?id={{item.id}}">
+                    <image mode="aspectFit" src="{{item.img?item.img:defaultImg}}"></image>
+                    <text class="title">{{item.bookName}}</text>
+                </navigator>
+            </view>
+            <template is="zan-loadmore" wx:if='{{searching }}' data="{{ loading: true }}" />
+            <template is="zan-loadmore" wx:if='{{!searchList.length}}' data="{{ nodata: true }}" />
+        </view>
+    <view class="bookCom">
+        <view class="category">
+            <text>最新书籍 </text>
+            <text>/</text>
+            <text> NEW</text>
+        </view>
+        <view class="bookList">
+            <navigator class="bookItem" wx:for="{{util.sliceBooklist(bookList)}}" url="../bookDetail/bookDetail?id={{item.id}}">
+                <image mode="aspectFit" src="{{item.img?item.img:defaultImg}}"></image>
+                <text class="title">{{item.bookName}}</text>
+            </navigator>
+
+        </view>
+    </view>
+    <view class="bookCom">
+        <view class="category">
+            <text>全部书籍 </text>
+            <text>/</text>
+            <text> ALL</text>
+        </view>
+        <view class="bookList">
+            <navigator class="bookItem" wx:for="{{bookList}}" url="../bookDetail/bookDetail?id={{item.id}}">
+                <image mode="aspectFit" src="{{item.img?item.img:defaultImg}}"></image>
+                <text class="title">{{item.bookName}}</text>
+            </navigator>
+        </view>
+    </view>
+</view>
+<wxs module="util">
+    var sliceBooklist=function(list){ 
+        return list.slice(0,6) } 
+    module.exports = { sliceBooklist : sliceBooklist, }
+</wxs>

@@ -1,0 +1,27 @@
+var DateFr = {
+    getNum: function(num) {
+        if (num) {
+            var count = num.split(".")[0];
+            var point = num.split(".")[1];
+            if (parseInt(point) == 0) {
+                return count;
+            } else {
+                return num;
+            }
+        }
+    },
+     getName: function(name) {
+        if (name) {
+           
+                return name;
+            } else {
+                return "读书郎";
+            }
+       
+    }
+}
+
+module.exports = {
+    getNum: DateFr.getNum,
+    getName:DateFr.getName
+}
